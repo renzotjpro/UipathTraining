@@ -1,0 +1,19 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: UiPath-Variables
+
+steps:
+  - task: PowerShell@2
+    displayName: 'Test UiPath Connection'
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host "Testing connection to: $(uipath.url)"
+        Write-Host "Tenant: $(uipath.tenantName)"
+        Write-Host "Organization ID: $(uipath.organizationId)"
+        Write-Host "Client ID: $(uipath.clientId)"
+        Write-Host "Client Secret is configured: $([string]::IsNullOrEmpty('$(uipath.clientSecret)') -eq $false)"
